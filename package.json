@@ -1,0 +1,13 @@
+{
+  "name": "hex-movie-v2",
+  "private": true,
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel --if-present dev",
+    "lint": "pnpm -r --if-present lint",
+    "dev:client": "pnpm --filter ./client dev",
+    "lint:client": "pnpm --filter ./client lint",
+    "dev:server": "pnpm --filter ./server dev",
+    "lint:server": "pnpm --filter ./server lint"
+  }
+}
