@@ -1,0 +1,133 @@
+/* -------------------------------------------------------
+   Hex Movie theme tokens
+   - "system" = no html class
+   - "light|dark|blue" = html class
+   - In system mode, styling follows prefers-color-scheme.
+------------------------------------------------------- */
+
+:root {
+  /* Sizing/radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Transitions */
+  --transition: all 0.2s ease;
+
+  /* Semantic tokens */
+  --bg-primary: #0f0f1a;
+  --bg-secondary: #1a1a2e;
+  --bg-tertiary: #252541;
+
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --accent-primary: #6366f1;
+  --accent-hover: #4f46e5;
+
+  --success: #10b981;
+  --success-hover: #059669;
+
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+
+  --border-color: #27273f;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 10px -2px rgba(0, 0, 0, 0.45);
+
+  /* Button/interaction tokens */
+  --btn-neutral-color: rgba(255, 255, 255, 0.92);
+  --btn-neutral-hover: rgba(255, 255, 255, 0.04);
+  --btn-neutral-active: rgba(255, 255, 255, 0.07);
+
+  --btn-primary-color: var(--accent-primary);
+  --btn-primary-hover: var(--accent-hover);
+  --btn-primary-active: color-mix(in srgb, var(--accent-primary) 85%, black 15%);
+
+  --page-bg: var(--bg-primary);
+
+  --bg: var(--bg-primary);
+  --panel: var(--bg-secondary);
+  --panel-2: var(--bg-tertiary);
+
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --muted2: var(--text-muted);
+
+  --border: var(--border-color);
+}
+
+/* System mode: Light preference (ONLY when no explicit theme class is set) */
+@media (prefers-color-scheme: light) {
+  html:not(.light):not(.dark):not(.blue) {
+    color-scheme: light;
+
+    --bg-primary: #fbfbfe;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f3f4ff;
+
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+
+    --border-color: rgba(0, 0, 0, 0.10);
+
+    --btn-neutral-color: rgba(0, 0, 0, 0.90);
+    --btn-neutral-hover: rgba(0, 0, 0, 0.06);
+    --btn-neutral-active: rgba(0, 0, 0, 0.10);
+  }
+}
+
+/* System mode: Dark preference (base already matches dark, just set color-scheme) */
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not(.dark):not(.blue) {
+    color-scheme: dark;
+  }
+}
+
+/* Explicit themes */
+html.light {
+  color-scheme: light;
+
+  --bg-primary: #fbfbfe;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f4ff;
+
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+
+  --border-color: rgba(0, 0, 0, 0.10);
+
+  --btn-neutral-color: rgba(0, 0, 0, 0.90);
+  --btn-neutral-hover: rgba(0, 0, 0, 0.06);
+  --btn-neutral-active: rgba(0, 0, 0, 0.10);
+}
+
+html.dark {
+  color-scheme: dark;
+  /* Uses :root values */
+}
+
+html.blue {
+  color-scheme: light;
+
+  --bg-primary: #e3f2fd;
+  --bg-secondary: #d7ebff;
+  --bg-tertiary: #cfe6ff;
+
+  --text-primary: #0b1220;
+  --text-secondary: #1b2a44;
+  --text-muted: #3b4a62;
+
+  --accent-primary: #2563eb;
+  --accent-hover: #1d4ed8;
+
+  --border-color: rgba(11, 18, 32, 0.16);
+
+  --btn-neutral-color: rgba(0, 0, 0, 0.90);
+  --btn-neutral-hover: rgba(0, 0, 0, 0.06);
+  --btn-neutral-active: rgba(0,  0, 0, 0.10);
+}

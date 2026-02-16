@@ -15,6 +15,7 @@
   font-size: 1rem;
   font-weight: 650;
   letter-spacing: -0.01em;
+  color: var(--text);
 }
 
 .controls {
@@ -32,27 +33,21 @@
   align-items: center;
 
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   background: transparent;
-  cursor: pointer;
-}
 
-:global(html.dark) .ctrlBtn {
-  border-color: rgba(255, 255, 255, 0.145);
+  cursor: pointer;
+  color: var(--text);
+  transition: var(--transition);
 }
 
 .ctrlBtn:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-:global(html.dark) .ctrlBtn:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--btn-neutral-hover);
 }
 
 .scroller {
   margin-top: 0.75rem;
 
-  /* The important containment trio */
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -71,45 +66,44 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 .scroller::-webkit-scrollbar {
   display: none;
 }
 
 .card {
   flex: 0 0 auto;
-  width: 16rem; /* stable width so it doesn't stretch weirdly */
+  width: 16rem;
   scroll-snap-align: start;
 }
 
 .thumb {
   width: 100%;
   aspect-ratio: 16 / 9;
+
   border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
+
   position: relative;
   overflow: hidden;
-  background: rgba(9, 9, 11, 0.04);
-}
 
-:global(html.dark) .thumb {
-  border-color: rgba(255, 255, 255, 0.145);
-  background: rgba(250, 250, 250, 0.06);
+  background: color-mix(in srgb, var(--text) 6%, transparent);
 }
 
 .badge {
   position: absolute;
-  left: 10px;
+  right: 10px;
   top: 10px;
+
   border-radius: 999px;
   padding: 6px 10px;
+
   font-size: 12px;
   font-weight: 650;
-  background: rgba(9, 9, 11, 0.75);
-  color: #fff;
-}
 
-:global(html.dark) .badge {
-  background: rgba(250, 250, 250, 0.18);
+  background: color-mix(in srgb, var(--bg-primary) 72%, transparent);
+  color: var(--text-primary);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
 .meta {
@@ -120,21 +114,28 @@
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
+  color: var(--text);
 }
 
 .sub {
   margin: 0.25rem 0 0 0;
   font-size: 0.85rem;
-  color: rgba(9, 9, 11, 0.65);
+  color: color-mix(in srgb, var(--text) 70%, transparent);
 }
 
-:global(html.dark) .sub {
-  color: rgba(250, 250, 250, 0.65);
+/* Gradient placeholders */
+.g1 {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.28), rgba(14, 165, 233, 0.18));
 }
-
-/* gradients (placeholders) */
-.g1 { background: linear-gradient(135deg, rgba(99,102,241,.28), rgba(14,165,233,.18)); }
-.g2 { background: linear-gradient(135deg, rgba(217,70,239,.26), rgba(244,63,94,.18)); }
-.g3 { background: linear-gradient(135deg, rgba(16,185,129,.24), rgba(132,204,22,.16)); }
-.g4 { background: linear-gradient(135deg, rgba(245,158,11,.25), rgba(249,115,22,.16)); }
-.g5 { background: linear-gradient(135deg, rgba(34,211,238,.22), rgba(139,92,246,.18)); }
+.g2 {
+  background: linear-gradient(135deg, rgba(217, 70, 239, 0.26), rgba(244, 63, 94, 0.18));
+}
+.g3 {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.24), rgba(132, 204, 22, 0.16));
+}
+.g4 {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(249, 115, 22, 0.16));
+}
+.g5 {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(139, 92, 246, 0.18));
+}

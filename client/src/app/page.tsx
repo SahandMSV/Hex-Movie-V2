@@ -1,5 +1,5 @@
-// app/page.tsx
 import styles from "./page.module.css";
+import TopNav from "../components/TopNav/TopNav";
 import Carousel from "../components/Carousel";
 
 const makeItems = (prefix: string, count: number) =>
@@ -13,6 +13,7 @@ const makeItems = (prefix: string, count: number) =>
 export default function Home() {
   return (
     <div className={styles.page}>
+      <TopNav />
       <main className={styles.main}>
         <div className={styles.header}>
           <div className={styles.intro}>

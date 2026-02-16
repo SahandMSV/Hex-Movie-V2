@@ -1,0 +1,130 @@
+.shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+
+  background-color: color-mix(in srgb, var(--panel) 92%, transparent);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.nav {
+  max-width: 48rem;
+  margin: 0 auto;
+  height: 56px;
+
+  padding: 0.75rem 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .tabs {
+    display: none;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.brand {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tab {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.tab:hover {
+  background: var(--btn-neutral-hover);
+  border-color: var(--border);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.iconBtn {
+  height: 40px;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+
+  cursor: pointer;
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.iconBtn:hover {
+  background: var(--btn-neutral-hover);
+}
+
+.btn,
+.btnPrimary {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn {
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+}
+
+.btn:hover {
+  background: var(--btn-neutral-hover);
+}
+
+.btnPrimary {
+  border: 1px solid transparent;
+  background: var(--text);
+  color: var(--panel);
+}
+
+.btnPrimary:hover {
+  opacity: 0.92;
+}
