@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
-import { isTheme, type Theme } from "@/theme/theme";
+import { isTheme, type Theme } from "./theme/theme";
 
 export function proxy(request: NextRequest) {
   const raw = request.cookies.get("theme")?.value;
   const theme: Theme = isTheme(raw) ? raw : "system";
 
-  // Make x-theme available to Server Components via headers()
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-theme", theme);
 
@@ -15,7 +13,6 @@ export function proxy(request: NextRequest) {
     request: { headers: requestHeaders },
   });
 
-  // Optional: also expose for debugging in the browser devtools Network tab
   response.headers.set("x-theme", theme);
 
   return response;

@@ -3,17 +3,25 @@ import { cookies, headers } from "next/headers";
 
 import ThemeProvider from "../theme/ThemeProvider";
 import { isTheme, type Theme } from "../theme/theme";
+import { headingFont, bodyFont } from "../styles/fonts";
 
-import "../styles/theme.css";
-import "./globals.css";
-
+import "./index.css";
 
 export const metadata: Metadata = {
   title: "Hex Movie",
   description: "Hex Movie",
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+function themeToHtmlClass(theme: Theme): string {
+  if (theme === "system") return "";
+  return theme;
+}
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const h = await headers();
   const headerThemeRaw = h.get("x-theme");
 
@@ -23,18 +31,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const headerTheme = isTheme(headerThemeRaw)
     ? (headerThemeRaw as Theme)
     : undefined;
+
   const cookieTheme = isTheme(cookieThemeRaw)
     ? (cookieThemeRaw as Theme)
     : undefined;
 
   const initialTheme: Theme = headerTheme ?? cookieTheme ?? "system";
 
+  const themeClass = themeToHtmlClass(initialTheme);
+
+  const htmlClassName =
+    `${headingFont.variable} ${bodyFont.variable} ${themeClass}`.trim();
+
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={initialTheme !== "system" ? initialTheme : undefined}
-    >
+    <html lang="en" suppressHydrationWarning className={htmlClassName}>
       <body>
         <ThemeProvider initialTheme={initialTheme}>{children}</ThemeProvider>
       </body>

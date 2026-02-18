@@ -1,13 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo } from "react";
+import Link from "next/link";
+
+import Button from "../ui/Button";
+import Icon from "../Icon/Icon";
 import styles from "./TopNav.module.css";
 
-import { useTheme } from "@/theme/ThemeProvider";
-import type { Theme } from "@/theme/theme";
+import { useTheme } from "../../theme/ThemeProvider";
+import type { Theme } from "../../theme/theme";
 
-const THEME_ORDER: Theme[] = ["system", "light", "dark", "blue"];
+const THEME_ORDER: Theme[] = ["system", "dark", "light", "blue"];
 
 export default function TopNav() {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -17,6 +20,14 @@ export default function TopNav() {
     const next = THEME_ORDER[(idx + 1) % THEME_ORDER.length];
     setTheme(next);
   }
+
+  const effectiveTheme: Exclude<Theme, "system"> =
+    theme === "system" ? resolvedTheme : theme;
+
+  const themeIcon = useMemo(() => {
+    // Light => sun, Dark/Blue => moon, System follows resolvedTheme automatically
+    return effectiveTheme === "light" ? "sun" : "moon";
+  }, [effectiveTheme]);
 
   const themeLabel = useMemo(() => {
     if (theme === "system") return `Theme: System (${resolvedTheme})`;
@@ -48,22 +59,26 @@ export default function TopNav() {
         </div>
 
         <div className={styles.right}>
-          <button
+          <Button
             type="button"
-            className={styles.iconBtn}
             onClick={cycleTheme}
             aria-label={themeLabel}
             title={themeLabel}
+            small
+            tertiaryMono
+            pill
           >
+            <Icon name={themeIcon} size={18} className="icon" />
             {theme === "system" ? "System" : theme}
-          </button>
+          </Button>
 
-          <Link href="/login" className={styles.btn}>
+          <Button href="/login" small secondary pill>
             Log in
-          </Link>
-          <Link href="/signup" className={styles.btnPrimary}>
+          </Button>
+
+          <Button href="/signup" small primary pill>
             Sign up
-          </Link>
+          </Button>
         </div>
       </nav>
     </header>

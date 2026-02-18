@@ -9,6 +9,7 @@ import React, {
   useState,
   type ReactNode,
 } from "react";
+
 import type { Theme } from "./theme";
 import { isTheme } from "./theme";
 
@@ -29,20 +30,18 @@ function getSystemTheme(): Exclude<Theme, "system"> {
 
 function applyHtmlClass(theme: Theme) {
   if (typeof document === "undefined") return;
-
   const root = document.documentElement;
 
   // Remove theme classes, add when not system.
   root.classList.remove("light", "dark", "blue");
-
-  if (theme !== "system") {
-    root.classList.add(theme);
-  }
+  if (theme !== "system") root.classList.add(theme);
 }
 
 function persistThemeCookie(theme: Theme) {
   if (typeof document === "undefined") return;
-  document.cookie = `theme=${theme}; Path=/; Max-Age=${365 * 24 * 60 * 60}; SameSite=Strict`;
+  document.cookie = `theme=${theme}; Path=/; Max-Age=${
+    365 * 24 * 60 * 60
+  }; SameSite=Strict`;
 }
 
 export function useTheme() {
@@ -60,21 +59,25 @@ export default function ThemeProvider({
   children,
   initialTheme = "system",
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(() =>
+  const [theme, setThemeState] = useState<Theme>(
     isTheme(initialTheme) ? initialTheme : "system",
   );
-  const [systemTheme, setSystemTheme] = useState<Exclude<Theme, "system">>(() =>
-    getSystemTheme(),
-  );
 
-  // Track system theme changes so resolvedTheme updates while user is on "system".
+  const [systemTheme, setSystemTheme] =
+    useState<Exclude<Theme, "system">>(getSystemTheme());
+
+  const resolvedTheme: Exclude<Theme, "system"> =
+    theme === "system" ? systemTheme : theme;
+
+  // Track system theme changes so resolvedTheme updates while user is on system.
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
 
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
-    const update = () => setSystemTheme(mql.matches ? "dark" : "light");
 
+    const update = () => setSystemTheme(mql.matches ? "dark" : "light");
     update();
+
     // Safari compatibility
     if (typeof mql.addEventListener === "function") {
       mql.addEventListener("change", update);
@@ -87,11 +90,9 @@ export default function ThemeProvider({
 
   // Keep DOM + cookie in sync
   useLayoutEffect(() => {
-    applyHtmlClass(theme);
+    applyHtmlClass(theme === "system" ? resolvedTheme : theme);
     persistThemeCookie(theme);
-  }, [theme]);
-
-  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  }, [theme, resolvedTheme]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({

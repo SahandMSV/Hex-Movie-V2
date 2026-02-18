@@ -2,7 +2,8 @@
 
 import { useMemo, useRef } from "react";
 import styles from "./Carousel.module.css";
-import Icon from "./Icon/Icon";
+import Button from "../ui/Button";
+import Icon from "../Icon/Icon";
 
 type CarouselItem = {
   id: string;
@@ -29,7 +30,7 @@ export default function Carousel({
     const el = scrollerRef.current;
     if (!el) return;
     el.scrollBy({
-      left: Math.round(el.clientWidth * 0.9) * dir,
+      left: Math.round(el.clientWidth * 0.6) * dir,
       behavior: "smooth",
     });
   };
@@ -40,23 +41,23 @@ export default function Carousel({
         <h2 className={styles.h2}>{title}</h2>
 
         <div className={styles.controls}>
-          <button
+          <Button
             className={styles.ctrlBtn}
             onClick={() => scrollByAmount(-1)}
             aria-label="Scroll left"
             type="button"
           >
-            <Icon name="arrow-left" size={18} className={styles.ctrlIcon} />
-          </button>
+            <Icon name="arrow-left" className={styles.ctrlIcon} />
+          </Button>
 
-          <button
+          <Button
             className={styles.ctrlBtn}
             onClick={() => scrollByAmount(1)}
             aria-label="Scroll right"
             type="button"
           >
-            <Icon name="arrow-right" size={18} className={styles.ctrlIcon} />
-          </button>
+            <Icon name="arrow-right" className={styles.ctrlIcon} />
+          </Button>
         </div>
       </div>
 

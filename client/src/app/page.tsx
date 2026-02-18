@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import TopNav from "../components/TopNav/TopNav";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/Carousel/Carousel";
 
 const makeItems = (prefix: string, count: number) =>
   Array.from({ length: count }, (_, i) => ({
@@ -19,7 +19,8 @@ export default function Home() {
           <div className={styles.intro}>
             <h1 className={styles.h1}>See What's trending</h1>
             <p className={styles.p}>
-              The latest movies, shows, and personalized picks all in one place.
+              The latest movies, shows, and personalized picks
+              <br /> all in one place.
             </p>
           </div>
         </div>

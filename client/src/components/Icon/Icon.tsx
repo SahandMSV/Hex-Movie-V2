@@ -1,6 +1,6 @@
 import styles from "./Icon.module.css";
 
-type IconName = "arrow-left" | "arrow-right";
+type IconName = "arrow-left" | "arrow-right" | "sun" | "moon";
 
 export default function Icon({
   name,
@@ -14,6 +14,7 @@ export default function Icon({
   className?: string;
 }) {
   const labelled = Boolean(title);
+  const href = `/sprite.svg#${name}`;
 
   return (
     <svg
@@ -24,8 +25,9 @@ export default function Icon({
       aria-label={labelled ? title : undefined}
       role={labelled ? "img" : "presentation"}
       viewBox="0 0 24 24"
+      focusable="false"
     >
-      <use href={`/sprite.svg#${name}`} />
+      <use href={href} xlinkHref={href} />
     </svg>
   );
 }

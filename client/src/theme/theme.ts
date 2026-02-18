@@ -1,4 +1,4 @@
-export const THEMES = ["system", "dark", "light", "blue"] as const;
+export const THEMES = ["system", "light", "dark", "blue"] as const;
 export type Theme = (typeof THEMES)[number];
 
 export function isTheme(value: unknown): value is Theme {
